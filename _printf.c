@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * _printf - Custom printf function
@@ -21,19 +20,22 @@ int _printf(const char *format, ...)
             switch (*format)
             {
             case 'c':
-                count += putchar(va_arg(args, int));
+		{
+		char temp = (char)va_arg(args, int);
+                count += write(1, &temp, 1);
                 break;
+		}
             case 's':
-                count += puts(va_arg(args, char *));
+                count += write(1, va_arg(args, char *), 1);
                 break;
             default:
-                count += putchar('%'); /* Handle '%%' */
+                count += write(1, "%", 1); /* Handle '%%' */
                 break;
             }
         }
         else
         {
-            count += putchar(*format);
+            count += write(1, format, 1);
         }
 
         format++;
