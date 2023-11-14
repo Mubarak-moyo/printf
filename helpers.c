@@ -35,3 +35,20 @@ int print_percent(void)
 {
 	return (write(1, "%", 1));
 }
+
+/**
+ * print_int - prints an integer.
+ * @args: va_list of arguments.
+ * Return: NUmber of characters printed.
+ */
+int print_int(va_list args)
+{
+	int digit = va_arg(args, int);
+	char buffer[12];
+	int count = 0;
+
+	count = sprintf(buffer, "%d", digit);
+	write(1, buffer, count);
+
+	return (count);
+}
