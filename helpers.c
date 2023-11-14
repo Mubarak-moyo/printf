@@ -51,5 +51,5 @@ int print_int(va_list args, int *count)
 	output_count = sprintf(buffer, "%d", digit);
 	*count += write(1, buffer, output_count);
 
-	return (*count);
+	return (output_count);
 }
