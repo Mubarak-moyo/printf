@@ -1,38 +1,48 @@
 #include "main.h"
 
+/**
+ * _printf - This is a custom printf function.
+ * @format: This is the format string.
+ * Return: The number of characters printed.
+ */
 int _printf(const char *format, ...)
 {
-    va_list args;
-    int count = 0;
-    char temp_char;
-    char *temp_str;
+	va_list args;
+	int count = 0;
 
-    va_start(args, format);
+	va_start(args, format);
 
-    while (*format)
+	while (*format)
 	{
-        if (*format == '%') {
-            format++;
-            if (*format == 'c') {
-                temp_char = (char)va_arg(args, int);
-                count += write(1, &temp_char, 1);
-            } else if (*format == 's') {
-                temp_str = va_arg(args, char *);
-                count += write(1, temp_str, strlen(temp_str));
-            } else if (*format == '%') {
-                count += write(1, "%", 1);
-            } else {
-                count += write(1, "%", 1);
-                count += write(1, format, 1);
-            }
-        } else {
-            count += write(1, format, 1);
-        }
+	if (*format == '%')
+	{
+	format++;
+	switch (*format)
+	{
+	case 'c':
+		count += print_char(args);
+		break;
+	case 's':
+		count += print_string(args);
+		break;
+	case '%':
+		count += print_percent();
+		break;
+	default:
+		count += write(1, "%", 1);
+		count += write(1, format, 1);
+		break;
+	}
+	}
+	else
+	{
+		count += write(1, format, 1);
+	}
 
-        format++;
-    }
+		format++;
+	}
 
-    va_end(args);
+	va_end(args);
 
-    return count;
+	return (count);
 }
