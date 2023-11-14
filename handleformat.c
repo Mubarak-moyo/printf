@@ -21,8 +21,6 @@ int handle_format(const char *format, va_list args, int *count)
 	case 'd':
 	case 'i':
 	return (print_int(args, count));
-	case 'b':
-	return (print_binary(args));
 
 	default:
 	write(1, "%", 1);
