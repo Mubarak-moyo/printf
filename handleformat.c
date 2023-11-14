@@ -8,22 +8,25 @@
  *
  * Return: Number of characters printed.
  */
-int handle_format(const char *format, va_list args)
+int handle_format(const char *format, va_list args, int *count)
 {
-    switch (*format)
-    {
-    case 'c':
-        return print_char(args);
-    case 's':
-        return print_string(args);
-    case '%':
-        return print_percent();
-    case 'd':
-    case 'i':
-        return print_int(args);
-    default:
-        write(1, "%", 1);
-        write(1, format, 1);
-        return 2;
-    }
+	switch (*format)
+	{
+	case 'c':
+	return (print_char(args));
+	case 's':
+	return (print_string(args));
+	case '%':
+	return (print_percent());
+	case 'd':
+	case 'i':
+	return (print_int(args, count));
+	case 'b':
+	return (print_binary(args));
+
+	default:
+	write(1, "%", 1);
+	write(1, format, 1);
+	return (2);
+	}
 }

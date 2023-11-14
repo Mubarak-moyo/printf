@@ -39,16 +39,17 @@ int print_percent(void)
 /**
  * print_int - prints an integer.
  * @args: va_list of arguments.
+ * @count: This is pointer to the count of characters printed.
  * Return: NUmber of characters printed.
  */
-int print_int(va_list args)
+int print_int(va_list args, int *count)
 {
 	int digit = va_arg(args, int);
 	char buffer[12];
-	int count = 0;
+	int output_count;
 
-	count = sprintf(buffer, "%d", digit);
-	write(1, buffer, count);
+	output_count = sprintf(buffer, "%d", digit);
+	*count += write(1, buffer, output_count);
 
-	return (count);
+	return (*count);
 }

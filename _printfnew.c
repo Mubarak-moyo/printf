@@ -8,28 +8,27 @@
  */
 int _printf(const char *format, ...)
 {
-    va_list args;
-    int count = 0;
+	va_list args;
+	int count = 0;
 
-    va_start(args, format);
+	va_start(args, format);
 
-    while (*format)
-    {
-        if (*format == '%')
-        {
-            format++;
-            count += handle_format(format, args);
-        }
-        else
-        {
-            count += write(1, format, 1);
-        }
+	while (*format)
+	{
+	if (*format == '%')
+	{
+	format++;
+	count += handle_format(format, args, &count);
+	}
+	else
+	{
+	count += write(1, format, 1);
+	}
 
-        format++;
-    }
+	format++;
+	}
 
-    va_end(args);
+	va_end(args);
 
-    return count;
+	return (count);
 }
-

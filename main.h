@@ -10,7 +10,8 @@ int _printf(const char *format, ...);
 int print_char(va_list args);
 int print_string(va_list args);
 int print_percent(void);
-int print_int(va_list args);
-int handle_format(const char *format, va_list args);
+int print_int(va_list args, int *count);
+int handle_format(const char *format, va_list args, int *count);
+int print_binary(va_list args);
 
 #endif /* MAIN_H */
